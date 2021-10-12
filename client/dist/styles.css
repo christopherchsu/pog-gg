@@ -1,0 +1,16 @@
+.profileIcon {
+  max-height: 128px;
+  max-width: 128px;
+}
+
+.userProfile {
+  position: relative;
+  max-width: 128px;
+  text-align: center;
+}
+
+.level {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+}
