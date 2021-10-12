@@ -3,14 +3,59 @@
   max-width: 128px;
 }
 
+.box {
+  border: 1px solid #cdd2d2;
+  box-shadow: 0 1px #dcdfdf;
+  background: #f2f2f2;
+  border-radius: 2px;
+}
+
+.flexRank,
+.soloRank {
+  display: table;
+  padding: 8px;
+}
+
+.rankImg {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 120px;
+  height: 124px;
+}
+
+.rankType {
+  font-size: 11px;
+  color: #879292;
+}
+
+.tierRank {
+  font-size: 15px;
+  font-weight: bold;
+  color: #1f8ecd;
+}
+
+.tierInfo {
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.soloRankIcon,
+.flexRankIcon {
+  width: 104px;
+  height: 104px;
+}
+
+.rankDetails {
+  display: table-cell;
+  vertical-align: middle;
+  line-height: 1.5;
+  text-align: left;
+}
+
 .userProfile {
   position: relative;
   max-width: 128px;
   text-align: center;
-}
-
-.level {
-  position: absolute;
-  top: 100%;
-  left: 50%;
 }

@@ -9,7 +9,8 @@ class App extends React.Component {
     this.state = {
       userName: '',
       userInfo: {},
-      rankInfo: []
+      rankInfo: [],
+      matchIds: []
     }
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,6 +45,12 @@ class App extends React.Component {
       .catch(err => {
         console.log(err);
       })
+      axios.get(`/match/${data.data.puuid}`)
+      .then(data => {
+        this.setState({
+          matchIds: data.data
+        })
+      })
     })
     .catch(err => {
       console.log(err);
@@ -54,7 +61,7 @@ class App extends React.Component {
     return(
     <div>
       <Search userName={this.state.userName} handleInputChange={this.handleInputChange} handleSubmit={this.handleSubmit}/>
-      <Profile userInfo={this.state.userInfo} rankInfo={this.state.rankInfo}/>
+      <Profile userInfo={this.state.userInfo} rankInfo={this.state.rankInfo} matchIds={this.state.matchIds}/>
     </div>
     )
   }
