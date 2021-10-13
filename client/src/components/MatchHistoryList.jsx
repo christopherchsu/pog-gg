@@ -1,7 +1,8 @@
 import React from 'react';
 import Match from './Match.jsx';
 import queues from './queues';
-
+import summonerSpells from './summoner'
+import runes from './runesReforged'
 
 class MatchHistoryList extends React.Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class MatchHistoryList extends React.Component {
       this.props.matchIds.length !== 0 ?
       <div className='matchHistory'>
         {this.props.matchIds.map(matchId => {
-          return <Match matchId={matchId} key={matchId} queueTypes={queues} summonerName={this.props.summonerName}/>
+          return <Match matchId={matchId} key={matchId} queueTypes={queues} summonerName={this.props.summonerName} summonerSpells={summonerSpells} runes={runes}/>
         })}
       </div>
       :

@@ -61,12 +61,26 @@
 
 .match {
   table-layout: fixed;
-  background-color: #a3cfec;
-  border-color: #99b9cf;
   display: table;
   width: 689px;
   border-collapse: collapse;
   border: 1px solid #cdd2d2;
+}
+
+.match > div {
+  display: table-cell;
+  height: 96px;
+  vertical-align: middle;
+}
+
+.win {
+  background-color: #a3cfec;
+  border-color: #99b9cf;
+}
+
+.lose {
+  background-color: #e2b6b3;
+  border-color: #cea7a7;
 }
 
 .gameStats {
@@ -77,6 +91,22 @@
   line-height: 16px;
 }
 
+.win > .gameStats >.bar {
+  display: block;
+  width: 27px;
+  margin: 5px auto;
+  height: 2px;
+  background: #99b9cf;
+}
+
+.lose > .gameStats >.bar {
+  display: block;
+  width: 27px;
+  margin: 5px auto;
+  height: 2px;
+  background: #cea7a7;
+}
+
 .gameType {
   font-weight: bold;
   width: 100px;
@@ -85,10 +115,126 @@
   text-overflow: ellipsis;
 }
 
-.bar {
+.playerChampionInfo {
+  width: 100px;
+  font-size: 0;
+  text-align: center;
+}
+
+.championImage {
+  display: inline-block;
+  width: 46px;
+  height: 46px;
+  vertical-align: middle;
+}
+
+.championImage > img {
   display: block;
-  width: 27px;
-  margin: 5px auto;
-  height: 2px;
-  background: #99b9cf;
+  width: 100%;
+  height: 100%;
+  background: #000;
+}
+
+.summonerSpells {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.spell:first-child {
+  margin-left: 0;
+}
+
+.spell {
+  display: block;
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.spell > img {
+  width: 22px;
+  height: 22px;
+}
+
+.championName {
+  margin-top: 8px;
+  font-size: 11px;
+  color: #555;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.runes {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.rune:first-child {
+  background: #000;
+}
+
+.rune {
+  margin-top: 2px;
+  border-radius: 50%;
+  border: 0;
+}
+
+.rune > img {
+  display: block;
+  width: 22px;
+  height: 22px;
+}
+
+.killStats {
+  font-size: 11px;
+  text-align: center;
+
+}
+
+.kda {
+  color: #879292;
+  font-size: 15px;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.kills {
+  color: #555e5e
+}
+
+.deaths {
+  color: #c6443e;
+}
+
+.assists {
+  color: #555e5e
+}
+
+.kdaRatio {
+  color: #555e5e;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 6px;
+}
+
+.ratio {
+  color: #353a3a;
+}
+
+.individualStats {
+  width: 90px;
+  font-size: 11px;
+  text-align: center;
+  line-height: 18px;
+  color: #555e5e;
+}
+
+.kp {
+  color: #c6443e;
 }
