@@ -13,7 +13,7 @@ router.get('/summoner/:userName', (req, res) => {
     res.json(data.data);
   })
   .catch(err => {
-    res.send(err);
+    res.status(400).send(err);
   })
 })
 
@@ -27,13 +27,13 @@ router.get('/summoner/:id/rank', (req, res) => {
     res.json(data.data);
   })
   .catch(err => {
-    res.send(err);
+    res.status(400).send(err);
   })
 })
 
 
-router.get('/match/:puuid', (req, res) => {
-  puuid = req.params.puuid;
+router.get('/matchhistory/:puuid', (req, res) => {
+  var puuid = req.params.puuid;
   axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/${puuid}/ids?start=0&count=10`, {headers: {
     'X-Riot-Token': TOKEN
   }}
@@ -42,9 +42,22 @@ router.get('/match/:puuid', (req, res) => {
     res.json(data.data);
   })
   .catch(err => {
-    res.send(err);
+    res.status(400).send(err);
   })
 })
 
+
+router.get('/match/:matchid' , (req, res) => {
+  var matchid = req.params.matchid;
+  axios.get(`https://americas.api.riotgames.com/lol/match/v5/matches/${matchid}`, {headers: {
+    'X-Riot-Token': TOKEN
+  }})
+  .then(data => {
+    res.json(data.data);
+  })
+  .catch(err => {
+    res.status(400).send(err);
+  })
+})
 
 module.exports = router;

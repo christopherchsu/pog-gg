@@ -7,6 +7,10 @@ class Profile extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+
+  }
+
   render() {
     return Object.keys(this.props.userInfo).length !== 0 ? (
       <div>
@@ -22,8 +26,10 @@ class Profile extends React.Component {
           ></img>
           <span className="level">{this.props.userInfo.summonerLevel}</span>
         </div>
+        <div>
         <Rank rankInfo={this.props.rankInfo}/>
-        <MatchHistoryList matchIds={this.props.matchIds}/>
+        <MatchHistoryList matchIds={this.props.matchIds} summonerName={this.props.userInfo.name}/>
+        </div>
       </div>
     ) : (
       <div>No User</div>

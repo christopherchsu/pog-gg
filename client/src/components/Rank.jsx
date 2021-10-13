@@ -1,81 +1,132 @@
-import React from 'react';
+import React from "react";
 
 class Rank extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {}
+
   render() {
+    if (this.props.rankInfo.length !== 0) {
+      var soloRankInfo = this.props.rankInfo.find(
+        (element) => element.queueType === "RANKED_SOLO_5x5"
+      );
+      var flexRankInfo = this.props.rankInfo.find(
+        (element) => element.queueType === "RANKED_FLEX_SR"
+      );
+    } else {
+      var soloRankInfo = undefined;
+      var flexRankInfo = undefined;
+    }
     return (
-      this.props.rankInfo.length !== 0 ? (
-        <div className="rankInfo">
-          <div className="soloRank box">
+      <div className="rankInfo">
+        {soloRankInfo ? (
+          <div className="rank box">
             <div className="rankImg">
               <img
-                className="soloRankIcon"
-                src={
-                  "./ranked-emblems/" + this.props.rankInfo[0].tier + ".png"
-                }
+                className="rankIcon"
+                src={"./ranked-emblems/" + soloRankInfo.tier + ".png"}
               ></img>
             </div>
             <div className="rankDetails">
               <div className="rankType">Ranked Solo</div>
               <div className="tierRank">
-                {this.props.rankInfo[0].tier.slice(0, 1) +
-                  this.props.rankInfo[0].tier.toLowerCase().slice(1) +
+                {soloRankInfo.tier.slice(0, 1) +
+                  soloRankInfo.tier.toLowerCase().slice(1) +
                   " " +
-                  this.props.rankInfo[0].rank}
+                  soloRankInfo.rank}
               </div>
               <div className="tierInfo">
                 <span className="leaguePoints">
-                  {this.props.rankInfo[0].leaguePoints + " LP"}
+                  {soloRankInfo.leaguePoints + " LP"}
                 </span>
                 {" / "}
                 <span className="winLose">
-                  {this.props.rankInfo[0].wins +
-                    "W " +
-                    this.props.rankInfo[0].losses +
-                    "L"}
+                  {soloRankInfo.wins + "W " + soloRankInfo.losses + "L"}
                 </span>
               </div>
             </div>
           </div>
-          <div className="flexRank box">
+        ) : (
+          <div className="rank box">
+          <div className="rankImg">
+            <img
+              className="rankIcon"
+              src={"./ranked-emblems/UNRANKED.png"}
+            ></img>
+          </div>
+          <div className="rankDetails">
+            <div className="rankType">Ranked Solo</div>
+            <div className="tierRank">
+              Unranked
+            </div>
+            <div className="tierInfo">
+              <span className="leaguePoints">
+
+              </span>
+
+              <span className="winLose">
+
+              </span>
+            </div>
+          </div>
+        </div>
+        )}
+        {flexRankInfo ? (
+          <div className="rank box">
             <div className="rankImg">
               <img
-                className="flexRankIcon"
-                src={
-                  "./ranked-emblems/" + this.props.rankInfo[1].tier + ".png"
-                }
+                className="rankIcon"
+                src={"./ranked-emblems/" + flexRankInfo.tier + ".png"}
               ></img>
             </div>
             <div className="rankDetails">
               <div className="rankType">Ranked Flex</div>
               <div className="tierRank">
-                {this.props.rankInfo[1].tier.slice(0, 1) +
-                  this.props.rankInfo[1].tier.toLowerCase().slice(1) +
+                {flexRankInfo.tier.slice(0, 1) +
+                  flexRankInfo.tier.toLowerCase().slice(1) +
                   " " +
-                  this.props.rankInfo[1].rank}
+                  flexRankInfo.rank}
               </div>
               <div className="tierInfo">
                 <span className="leaguePoints">
-                  {this.props.rankInfo[1].leaguePoints + " LP"}
+                  {flexRankInfo.leaguePoints + " LP"}
                 </span>
                 {" / "}
                 <span className="winLose">
-                  {this.props.rankInfo[1].wins +
-                    "W " +
-                    this.props.rankInfo[1].losses +
-                    "L"}
+                  {flexRankInfo.wins + "W " + flexRankInfo.losses + "L"}
                 </span>
               </div>
             </div>
           </div>
+        ) : (
+          <div className="rank box">
+          <div className="rankImg">
+            <img
+              className="rankIcon"
+              src={"./ranked-emblems/UNRANKED.png"}
+            ></img>
+          </div>
+          <div className="rankDetails">
+            <div className="rankType">Ranked Solo</div>
+            <div className="tierRank">
+              Unranked
+            </div>
+            <div className="tierInfo">
+              <span className="leaguePoints">
+
+              </span>
+
+              <span className="winLose">
+
+              </span>
+            </div>
+          </div>
         </div>
-      ) : (
-        <div className="rankInfo"></div>
-      )
-    )
+        )}
+      </div>
+    );
   }
 }
 

@@ -45,11 +45,14 @@ class App extends React.Component {
       .catch(err => {
         console.log(err);
       })
-      axios.get(`/match/${data.data.puuid}`)
+      axios.get(`/matchhistory/${data.data.puuid}`)
       .then(data => {
         this.setState({
           matchIds: data.data
         })
+      })
+      .catch(err => {
+        console.log(err);
       })
     })
     .catch(err => {
