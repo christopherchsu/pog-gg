@@ -1,6 +1,7 @@
 import React from "react";
 import Rank from './Rank.jsx';
 import MatchHistoryList from './MatchHistoryList.jsx';
+import champions from './champion'
 
 class Profile extends React.Component {
   constructor(props) {
@@ -12,10 +13,21 @@ class Profile extends React.Component {
   }
 
   render() {
-    return Object.keys(this.props.userInfo).length !== 0 ? (
-      <div>
+    if (Object.keys(this.props.userInfo).length !== 0 && Object.keys(this.props.rankInfo).length !== 0 && Object.keys(this.props.mostPlayedChamp).length !== 0 && this.props.matchIds.length !== 0) {
+
+      for (var champ in champions.data) {
+        if (parseInt(champions.data[champ].key) === this.props.mostPlayedChamp.championId) {
+          var championName = champ;
+          var championPoints = this.props.mostPlayedChamp.championPoints;
+          break;
+        }
+      }
+      return Object.keys(this.props.userInfo).length !== 0 ? (
+        <div className='profile'>
+        <div>
         <div className="userProfile">
-          <span className="name">{this.props.userInfo.name}</span>
+          <div>
+
           <img
             className="profileIcon"
             src={
@@ -23,18 +35,31 @@ class Profile extends React.Component {
               this.props.userInfo.profileIconId +
               ".png"
             }
-          ></img>
-          <span className="level">{this.props.userInfo.summonerLevel}</span>
+            ></img>
+            </div>
+          <div className='container'>
+
+            <div className="name">{this.props.userInfo.name}</div>
+          <div className="level">Level {this.props.userInfo.summonerLevel}</div>
+          <div className='mostPlayedChampion'>{championName + ' Main'}</div>
+          <div className='masteryPoints'><div>{championPoints.toLocaleString()}</div>
+          <div>Mastery Points</div>
+          </div>
+          </div>
         </div>
-        <div>
         <Rank rankInfo={this.props.rankInfo}/>
-        <MatchHistoryList matchIds={this.props.matchIds} summonerName={this.props.userInfo.name}/>
         </div>
+        <MatchHistoryList matchIds={this.props.matchIds} summonerName={this.props.userInfo.name} handleClick={this.props.handleClick} />
       </div>
     ) : (
-      <div>No User</div>
-    );
+      <div className='profile'></div>
+      );
+    } else {
+      return (
+        <div className='profile'>ENTER A SUMMONER NAME TO SEARCH</div>
+      )
+    }
   }
-}
+  }
 
-export default Profile;
+  export default Profile;

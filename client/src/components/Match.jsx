@@ -1,5 +1,7 @@
 import React from "react";
 import axios from "axios";
+import Item from "./Item.jsx";
+import Summoner from './Summoner.jsx';
 
 class Match extends React.Component {
   constructor(props) {
@@ -22,14 +24,34 @@ class Match extends React.Component {
       });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.matchId !== prevProps.matchId) {
+      axios
+        .get("/match/" + this.props.matchId)
+        .then((data) => {
+          this.setState({
+            matchDetails: data.data,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
   render() {
+
     if (Object.keys(this.state.matchDetails).length !== 0) {
       var gameType = this.props.queueTypes.find(
         (element) => element.queueId === this.state.matchDetails.info.queueId
-      ).description;
+      ).description || 'Normal';
       var gameInfo = this.state.matchDetails.info;
-      var unixTimeStamp = gameInfo.gameEndTimestamp;
-      var gameLength = gameInfo.gameDuration / 60;
+      var unixTimeStamp = gameInfo.gameStartTimestamp + gameInfo.gameDuration;
+      if (gameInfo.gameEndTimestamp === undefined) {
+        var gameLength = (gameInfo.gameDuration / 1000) / 60;
+      } else {
+        var gameLength = (gameInfo.gameDuration) / 60;
+      }
       var timePassed =
         (Math.round(new Date().getTime()) - unixTimeStamp) / 1000;
       var timeStampIdx = 0;
@@ -63,6 +85,9 @@ class Match extends React.Component {
       var playerPrimaryRuneId = player.perks.styles[0].selections[0].perk;
       var playerSecondaryRuneId =
         Math.floor(player.perks.styles[1].selections[0].perk / 100) * 100;
+      if (playerSecondaryRuneId >= 9000) {
+        playerSecondaryRuneId = 8000;
+      }
       for (var i = 0; i < this.props.runes.length; i++) {
         var playerPrimaryRune = this.props.runes[i].slots[0].runes.find(
           (element) => element.id === playerPrimaryRuneId
@@ -86,7 +111,25 @@ class Match extends React.Component {
           teamStats.objectives.champion.kills) *
           100
       );
-
+      var items = [
+        player.item0,
+        player.item1,
+        player.item2,
+        player.item6,
+        player.item3,
+        player.item4,
+        player.item5,
+      ];
+      var team1 = [];
+      var team2 = [];
+      for (var i = 0; i < gameInfo.participants.length; i++) {
+        if (gameInfo.participants[i].teamId === 100) {
+          team1.push(gameInfo.participants[i]);
+        } else {
+          team2.push(gameInfo.participants[i]);
+        }
+      }
+      console.log(gameInfo.gameDuration, gameLength);
       return (
         <div className={player.win ? "match win" : "match lose"}>
           <div className="gameStats">
@@ -162,14 +205,14 @@ class Match extends React.Component {
               <span className="assists">{player.assists}</span>
             </div>
             <div className="kdaRatio">
-              <span className="ratio">{kdaRatio}:1</span>
+              <span className="ratio">{kdaRatio !== 'Infinity' ? kdaRatio.toString() + ':1' : 'Perfect'}</span>
               {" KDA "}
             </div>
           </div>
           <div className="individualStats">
             <div className="champLevel">Level {player.champLevel}</div>
             <div className="cs">
-              {player.totalMinionsKilled + player.neutralMinionsKilled}(
+              {player.totalMinionsKilled + player.neutralMinionsKilled}{" "}(
               {(
                 (player.totalMinionsKilled + player.neutralMinionsKilled) /
                 gameLength
@@ -178,7 +221,25 @@ class Match extends React.Component {
             </div>
             <div className="kp">P/Kill {kp}%</div>
           </div>
-          <div className="items"></div>
+          <div className="items">
+            <div className="itemList">
+              {items.map((item, idx) => {
+                return <Item id={item} key={item*10 + idx} />;
+              })}
+            </div>
+          </div>
+          <div className='players'>
+            <div className='team'>
+              {team1.map(player => {
+                return <Summoner player={player} key={player.summonerName} handleClick={this.props.handleClick} />
+              })}
+            </div>
+            <div className='team'>
+            {team2.map(player => {
+                return <Summoner player={player} key={player.summonerName} handleClick={this.props.handleClick} />
+              })}
+              </div>
+          </div>
         </div>
       );
     } else {

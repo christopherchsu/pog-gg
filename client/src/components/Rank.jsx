@@ -46,6 +46,9 @@ class Rank extends React.Component {
                   {soloRankInfo.wins + "W " + soloRankInfo.losses + "L"}
                 </span>
               </div>
+              <div className="tierInfo">
+                <span className="winLose">Win Ratio {Math.round(soloRankInfo.wins/(soloRankInfo.wins+soloRankInfo.losses)*100)}%</span>
+                </div>
             </div>
           </div>
         ) : (
@@ -98,6 +101,9 @@ class Rank extends React.Component {
                   {flexRankInfo.wins + "W " + flexRankInfo.losses + "L"}
                 </span>
               </div>
+              <div className="tierInfo">
+                <span className="winLose">Win Ratio {Math.round(flexRankInfo.wins/(flexRankInfo.wins+flexRankInfo.losses)*100)}%</span>
+                </div>
             </div>
           </div>
         ) : (

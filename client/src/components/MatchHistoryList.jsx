@@ -10,12 +10,11 @@ class MatchHistoryList extends React.Component {
   }
 
   render() {
-
     return (
       this.props.matchIds.length !== 0 ?
       <div className='matchHistory'>
         {this.props.matchIds.map(matchId => {
-          return <Match matchId={matchId} key={matchId} queueTypes={queues} summonerName={this.props.summonerName} summonerSpells={summonerSpells} runes={runes}/>
+          return <Match matchId={matchId} key={matchId} queueTypes={queues} summonerName={this.props.summonerName} summonerSpells={summonerSpells} runes={runes} handleClick={this.props.handleClick} />
         })}
       </div>
       :

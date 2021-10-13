@@ -1,3 +1,55 @@
+body {
+  background-color: rgb(237, 237, 237);
+}
+
+.search {
+  text-align:center;
+}
+
+.userProfile {
+  display: flex;
+}
+
+.container{
+  margin-left: 5px;
+  text-align: left;
+  min-width: 180px;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.level {
+  color: #1f8ecd;
+}
+
+.masteryPoints {
+  color: #e19205;
+}
+
+.loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url('//upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Phi_fenomeni.gif/50px-Phi_fenomeni.gif')
+              50% 50% no-repeat rgb(249,249,249);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.profile {
+  display:flex;
+  justify-content: center;
+}
+
 .profileIcon {
   max-height: 128px;
   max-width: 128px;
@@ -65,6 +117,7 @@
   width: 689px;
   border-collapse: collapse;
   border: 1px solid #cdd2d2;
+  margin-top: 4px;
 }
 
 .match > div {
@@ -237,4 +290,67 @@
 
 .kp {
   color: #c6443e;
+}
+
+.items {
+  font-size: 0;
+}
+
+.itemList {
+  width: 96px;
+  margin: 0 auto;
+}
+
+.item {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  margin-top: 2px;
+  margin-right: 2px;
+  overflow: hidden;
+  background-color: #99b9cf;
+}
+
+.item > img {
+  width: 100%;
+  height: 100%;
+}
+
+.team {
+  float: left;
+  width: 50%;
+  overflow:hidden;
+}
+
+.summoner {
+  display: block;
+  width: 80px;
+  height: 18px;
+  margin-left: 3px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.summonerChampImg {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 3px;
+}
+
+.summonerChampImg > img {
+  width: 16px;
+  height: 16px;;
+}
+
+.summonerName {
+  display: inline-block;
+    max-width: 60px;
+    vertical-align: middle;
+    font-size: 11px;
+    color: #555;
+}
+
+.summonerName:hover {
+  cursor: pointer;
 }

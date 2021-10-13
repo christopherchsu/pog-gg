@@ -60,4 +60,19 @@ router.get('/match/:matchid' , (req, res) => {
   })
 })
 
+
+router.get('/mostplayedchampion/:id', (req, res) => {
+  var summonerId = req.params.id;
+  axios.get(`https://na1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${summonerId}`, {headers: {
+    'X-Riot-Token': TOKEN
+  }}
+  )
+  .then(data => {
+    res.json(data.data);
+  })
+  .catch(err => {
+    res.status(400).send(err);
+  })
+})
+
 module.exports = router;
